@@ -1,0 +1,359 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14490,        351]
+NotebookOptionsPosition[     13602,        328]
+NotebookOutlinePosition[     13993,        344]
+CellTagsIndexPosition[     13950,        341]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"transition", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{".6", ",", ".16"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{".4", ",", ".84"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"population", "=", 
+   RowBox[{"{", 
+    RowBox[{"100", ",", "4900"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"iData", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"iRate", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"firstCaseCheckDay", " ", "=", " ", "2"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"secondCaseCheckDay", " ", "=", " ", "10"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "<=", "50"}], ",", 
+     RowBox[{
+      RowBox[{"prior", " ", "=", " ", "population"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"iData", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", 
+          RowBox[{"population", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"i", "==", "firstCaseCheckDay"}], " ", ",", 
+        RowBox[{"firstCheck", "=", "population"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"i", "==", "secondCaseCheckDay"}], ",", 
+        RowBox[{"secondCheck", "=", "population"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"population", " ", "=", " ", 
+       RowBox[{"transition", ".", "population"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"iRate", ",", 
+        RowBox[{
+         RowBox[{"population", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "-", 
+         RowBox[{"prior", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"i", "++"}]}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"iData", ",", 
+    RowBox[{"PlotRange", "->", "All"}]}], "]"}], 
+  "Input"], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"StringForm", "[", 
+   RowBox[{
+   "\"\<On the ``nd day, `` students are infected and `` are healthy.\>\"", 
+    ",", "\[IndentingNewLine]", "firstCaseCheckDay", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Round", "[", 
+     RowBox[{"firstCheck", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Round", "[", 
+     RowBox[{"firstCheck", "[", 
+      RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"StringForm", "[", 
+   RowBox[{
+   "\"\<On the ``th day, `` students are infected and `` are healthy.\>\"", 
+    ",", "\[IndentingNewLine]", "secondCaseCheckDay", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Round", "[", 
+     RowBox[{"secondCheck", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Round", "[", 
+     RowBox[{"secondCheck", "[", 
+      RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"StringForm", "[", "\[IndentingNewLine]", 
+     RowBox[{
+     "\"\<The number of cases will have stabilized by the ``th day, assuming \
+a change of less than 1 person per day is stable.\>\"", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"FirstPosition", "[", 
+        RowBox[{"iRate", ",", 
+         RowBox[{"x_", "/;", 
+          RowBox[{"x", "<", "1"}]}]}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"thirdDayTransition", " ", "=", 
+   RowBox[{"transition", ".", "transition"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"thirdDayPopulation", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"1400", ",", " ", "3600"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"startingPopulation", "=", 
+   RowBox[{
+    RowBox[{"Inverse", "[", "thirdDayTransition", "]"}], ".", 
+    "thirdDayPopulation"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"StringForm", "[", "\[IndentingNewLine]", 
+    RowBox[{
+    "\"\<To have 1400 infected on the third day, there would need to be `` \
+infected students and `` healthy students at the start of the epidemic.\>\"", 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"Round", "[", 
+      RowBox[{"startingPopulation", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Round", "[", 
+      RowBox[{"startingPopulation", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}]}], " ", "]"}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8414727386038837`*^9, 3.841472789963441*^9}, {
+   3.84147291803096*^9, 3.841472969854973*^9}, {3.841473029385127*^9, 
+   3.841473037320939*^9}, {3.84147333715025*^9, 3.841473354160673*^9}, {
+   3.841473390152383*^9, 3.841473428425653*^9}, {3.841473469847357*^9, 
+   3.84147348567793*^9}, {3.8414735216249943`*^9, 3.841473582417985*^9}, {
+   3.841473739037168*^9, 3.841473828344306*^9}, {3.841474048609228*^9, 
+   3.841474203772944*^9}, {3.841474248854241*^9, 3.841474277491426*^9}, {
+   3.841474311607091*^9, 3.841474361461752*^9}, {3.8414744986776543`*^9, 
+   3.8414745976403723`*^9}, {3.84147463480689*^9, 3.841474643699112*^9}, {
+   3.841474697846917*^9, 3.841475098543367*^9}, {3.841475131020018*^9, 
+   3.841475259226007*^9}, {3.841475293754306*^9, 3.841475311541437*^9}, {
+   3.841475454401675*^9, 3.841475461872472*^9}, {3.841475511870216*^9, 
+   3.84147554709144*^9}, {3.8414756189447927`*^9, 3.8414756233669977`*^9}, {
+   3.8414756554399633`*^9, 3.841475655650131*^9}, {3.841475716457337*^9, 
+   3.841475784479745*^9}, {3.841475830381301*^9, 3.8414758376876497`*^9}, {
+   3.841475874058404*^9, 3.841475985977336*^9}, {3.841476041411742*^9, 
+   3.841476163544894*^9}, {3.841476494046331*^9, 3.841476515120078*^9}, {
+   3.8414765619337273`*^9, 3.841476571438416*^9}, {3.841476646799326*^9, 
+   3.841476676264165*^9}, {3.8414767522624407`*^9, 3.841476771004602*^9}, {
+   3.841476812057754*^9, 3.841476881386456*^9}, {3.841476939451461*^9, 
+   3.841476941680852*^9}, {3.841476978489853*^9, 3.841477105293578*^9}, {
+   3.84147714628852*^9, 3.8414772199795837`*^9}, {3.841486683343746*^9, 
+   3.841486717953027*^9}, {3.841486915575604*^9, 3.841486921902554*^9}, {
+   3.841486954119958*^9, 3.841487007690234*^9}, {3.84148707247194*^9, 
+   3.841487078794492*^9}, {3.841487109044252*^9, 3.8414871706598387`*^9}, {
+   3.841487206319097*^9, 3.84148723910219*^9}, {3.841487283806506*^9, 
+   3.841487368412236*^9}, {3.84148739871946*^9, 3.8414874036806593`*^9}, {
+   3.841487445518215*^9, 3.841487469311533*^9}, {3.841487522635262*^9, 
+   3.841487553812338*^9}, {3.84148798197324*^9, 3.8414880319909286`*^9}, {
+   3.841488106035503*^9, 3.8414881794840517`*^9}, {3.841488364632742*^9, 
+   3.841488453006392*^9}, {3.841488660385519*^9, 3.8414887469624968`*^9}, {
+   3.841488784422352*^9, 3.8414888259392233`*^9}, {3.84148887434549*^9, 
+   3.841488968054455*^9}, {3.8414892844449244`*^9, 3.8414893149298563`*^9}, {
+   3.8414894084375687`*^9, 3.8414895131854067`*^9}, {3.841489939286047*^9, 
+   3.841489989753357*^9}, {3.841490020744334*^9, 3.8414900587594233`*^9}, {
+   3.841490089662911*^9, 3.84149009139622*^9}, {3.841490137482456*^9, 
+   3.841490221050239*^9}, {3.841490253541428*^9, 3.841490331554159*^9}, {
+   3.8414903637483263`*^9, 3.841490806707056*^9}, {3.841490841218586*^9, 
+   3.841490873219256*^9}, {3.841490991508277*^9, 3.841490992982768*^9}, 
+   3.841491120338686*^9, {3.8414918093463*^9, 3.841491854909404*^9}, {
+   3.8414924273805103`*^9, 3.841492455007668*^9}, {3.841496124538814*^9, 
+   3.841496194914648*^9}, {3.841496397240757*^9, 3.841496503335907*^9}, {
+   3.841497123878083*^9, 3.841497200358777*^9}, {3.841498923139686*^9, 
+   3.8414989456954517`*^9}},
+ CellLabel->
+  "In[665]:=",ExpressionUUID->"ce9e0754-69f9-45d0-975d-b2b02d475666"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, 
+   {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.011000000000000001`], 
+    AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxdyU0ow3Ecx/E/i7QclrYyqc3fJk9pwzb25DN7Js1GSu2wVg4cTHm4aPOn
+JEQmDwdpB3IQ5aqcHCSpxWW1mwtaeSw7uHho/4ff9qtfn17fd004Ehgppiiq
+9e//b+69d+V2GOwht6EV1mWwilMHE32brCV4HmvK7q5tsZbi4V77JF/dZl2J
+m+DAz+E352p8nqos5007rJUwbPXN+22caYT29R93PZxVKK9401M+znV41IzS
+qX7O9bhU3A8d+Tk3IjQVXCgKcG7Gmfsy0cC7BQ5rr8vEW4NM6aTYzlsLWdo8
+7eLdiluROuvm3QbNC5Pw8G6HdKkkI1iHiCkp9vLWwzdjlgs24GJ2WyG4A4pY
+iBbciavKvVrBRlwvqlWCTZCMhwmbcWyMErZgsGSZsBWrunXCXfiKbhAGqubi
+ghnA+k6YsqGU3iS6Da8GwlQ34jaydyPpJLsdJ26y2xHzkN2BNGnGAZGX7E7I
+SDNOVOd1F5R53QU6r7vzzRSY8hT0AlNe3r+h9LK2
+     "]]}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "OptimizePlotMarkers" -> True, "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 50.}, {0, 1428.571428571428}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.8414923870634947`*^9, 3.841497207370995*^9, {3.841497336214266*^9, 
+   3.841497348314197*^9}, 3.8414974344621162`*^9, 3.841498764897729*^9, 
+   3.841498949272399*^9},
+ CellLabel->
+  "Out[672]=",ExpressionUUID->"6ec62eef-b518-416f-bad3-06520e616c4d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox["\<\"On the \\!\\(\\*RowBox[{\\\"2\\\"}]\\)nd day, \
+\\!\\(\\*RowBox[{\\\"844\\\"}]\\) students are infected and \\!\\(\\*RowBox[{\
+\\\"4156\\\"}]\\) are healthy.\"\>",
+  StringForm[
+  "On the ``nd day, `` students are infected and `` are healthy.", 2, 844, 
+   4156],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.841492387072433*^9, 3.841497207378911*^9, {3.841497336222439*^9, 
+   3.84149734832198*^9}, 3.841497434470767*^9, 3.8414987649097033`*^9, 
+   3.841498949280508*^9},
+ CellLabel->
+  "During evaluation of \
+In[665]:=",ExpressionUUID->"03e4a873-a261-492b-ad27-b55c5a457435"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"On the \\!\\(\\*RowBox[{\\\"10\\\"}]\\)th day, \\!\\(\
+\\*RowBox[{\\\"1428\\\"}]\\) students are infected and \
+\\!\\(\\*RowBox[{\\\"3572\\\"}]\\) are healthy.\"\>",
+  StringForm[
+  "On the ``th day, `` students are infected and `` are healthy.", 10, 1428, 
+   3572],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.841492387072433*^9, 3.841497207378911*^9, {3.841497336222439*^9, 
+   3.84149734832198*^9}, 3.841497434470767*^9, 3.8414987649097033`*^9, 
+   3.841498949282148*^9},
+ CellLabel->
+  "During evaluation of \
+In[665]:=",ExpressionUUID->"54aa048f-33d8-46df-8e1e-19d273dfb5b7"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"The number of cases will have stabilized by the \
+\\!\\(\\*RowBox[{\\\"10\\\"}]\\)th day, assuming a change of less than 1 \
+person per day is stable.\"\>",
+  StringForm[
+  "The number of cases will have stabilized by the ``th day, assuming a \
+change of less than 1 person per day is stable.", 10],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.841492387072433*^9, 3.841497207378911*^9, {3.841497336222439*^9, 
+   3.84149734832198*^9}, 3.841497434470767*^9, 3.8414987649097033`*^9, 
+   3.841498949283717*^9},
+ CellLabel->
+  "During evaluation of \
+In[665]:=",ExpressionUUID->"7241b035-e66c-45e5-8fc9-d85d3ef23366"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"To have 1400 infected on the third day, there would \
+need to be \\!\\(\\*RowBox[{\\\"1281\\\"}]\\) infected students and \
+\\!\\(\\*RowBox[{\\\"3719\\\"}]\\) healthy students at the start of the \
+epidemic.\"\>",
+  StringForm[
+  "To have 1400 infected on the third day, there would need to be `` infected \
+students and `` healthy students at the start of the epidemic.", 1281, 3719],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.841492387072433*^9, 3.841497207378911*^9, {3.841497336222439*^9, 
+   3.84149734832198*^9}, 3.841497434470767*^9, 3.8414987649097033`*^9, 
+   3.8414989492849607`*^9},
+ CellLabel->
+  "During evaluation of \
+In[665]:=",ExpressionUUID->"4fce07a7-28c7-4dce-aa2d-17bbc8335727"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1386, 847},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (July 9, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8a96fcc7-0b64-4b72-9843-7fd4141ab27e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 8345, 184, 787, "Input",ExpressionUUID->"ce9e0754-69f9-45d0-975d-b2b02d475666"],
+Cell[8928, 208, 1948, 49, 241, "Output",ExpressionUUID->"6ec62eef-b518-416f-bad3-06520e616c4d"],
+Cell[CellGroupData[{
+Cell[10901, 261, 625, 14, 24, "Print",ExpressionUUID->"03e4a873-a261-492b-ad27-b55c5a457435"],
+Cell[11529, 277, 629, 14, 24, "Print",ExpressionUUID->"54aa048f-33d8-46df-8e1e-19d273dfb5b7"],
+Cell[12161, 293, 661, 14, 24, "Print",ExpressionUUID->"7241b035-e66c-45e5-8fc9-d85d3ef23366"],
+Cell[12825, 309, 749, 15, 24, "Print",ExpressionUUID->"4fce07a7-28c7-4dce-aa2d-17bbc8335727"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
